@@ -1,0 +1,36 @@
+/* Estilo para el formulario de búsqueda */
+*{
+    background-color: #ffffff;
+}
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilo para la lista de pacientes */
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: #007BFF;
+}
+
+li {
+    margin-bottom: 10px;
+}

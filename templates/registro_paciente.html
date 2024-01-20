@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+
+    <title>Registro de Paciente</title>
+</head>
+<body>
+    <h1>Registro de Paciente</h1>
+
+    <!-- Formulario de búsqueda -->
+    <form class="my-form" method="GET" action="/buscar_pacientes">
+        <label for="buscar">Buscar Paciente:</label>
+        <input type="text" id="buscar" name="buscar" placeholder="Ingrese el nombre">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <!-- Formulario de registro de paciente -->
+    <form method="POST" action="/registrar_paciente">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <label for="genero">Género:</label>
+        <input type="text" id="genero" name="genero" required><br>
+
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required><br>
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <!-- Lista de pacientes -->
+    <h2>Lista de Pacientes:</h2>
+    <ul class="patient-list">
+        {% if pacientes %}
+        {% for entry in pacientes.get('entry', []) %}
+            {% set paciente = entry.get('resource', {}) %}
+            {% set nombre = paciente.get('name', [{}])[0].get('text', 'Nombre no disponible') %}
+            {% if nombre=='Nombre no disponible' %}
+            {% set given=paciente.get('name', [{}])[0].get('given') %}
+            {% set nombre = given[0]+ " "+paciente.get('name', [{}])[0].get('family', 'Nombre no disponible') %}
+            {% endif %}
+            <li class="patient-item">{{ nombre }}</li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+    
+</body>
+</html>
